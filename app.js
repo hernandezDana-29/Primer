@@ -27,3 +27,13 @@ app.get('/no-existe', (req, res) => {
 res.statusCode = 404;
 res.end('Ruta no encontrada');
 });
+
+const actividades = [
+{ id: 1, nombre: 'Rafting en el río Fonce', tipo: 'agua', precio: 60000 },
+{ id: 2, nombre: 'Parapente en el cañón', tipo: 'aire', precio: 180000 },
+{ id: 3, nombre: 'Caminata Camino Real a Barichara', tipo: 'tierra', precio: 0 },
+{ id: 4, nombre: 'Torrentismo en cascada', tipo: 'agua', precio: 70000 },
+];
+app.get('/actividades', (req, res) => {
+res.json(actividades);
+});
