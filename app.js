@@ -39,7 +39,7 @@ app.get('/actividades/:id', (req, res) => {
 const id = Number(req.params.id);
 const actividad = actividades.find((a) => a.id === id);
 if (!actividad) {
-res.status(404).json({ mensaje: `No existe la actividad con id ${req.params.id}`
+ return res.status(404).json({ mensaje: `No existe la actividad con id ${req.params.id}`
 });
 }
 res.json(actividad);
