@@ -35,6 +35,10 @@ const actividades = [
 { id: 4, nombre: 'Torrentismo en cascada', tipo: 'agua', precio: 70000 },
 ];
 
+app.get('/actividades', (req, res) => {
+res.json(actividades);
+});
+
 app.get('/actividades/:id', (req, res) => {
 const id = Number(req.params.id);
 const actividad = actividades.find((a) => a.id === id);
