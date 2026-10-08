@@ -33,15 +33,8 @@ const actividades = [
 { id: 2, nombre: 'Parapente en el cañón', tipo: 'aire', precio: 180000 },
 { id: 3, nombre: 'Caminata Camino Real a Barichara', tipo: 'tierra', precio: 0 },
 { id: 4, nombre: 'Torrentismo en cascada', tipo: 'agua', precio: 70000 },
+
 ];
-
-app.get('/actividades', (req, res) => {
-res.json(actividades);
-});
-
-app.get('/', (req, res) => {
-res.send('API Aventuras San Gil funcionando');
- });
 
 app.get('/actividades', (req, res) => {
 console.log('query:', req.query);
@@ -49,6 +42,12 @@ const { tipo } = req.query;
 if (!tipo) {
 return res.json(actividades);
 }
-const filtradas = actividades.filter((a) => a.tipo === tipo);
-res.json(filtradas);
+const tipoMinuscula = tipo.toLowerCase();
+  const filtradas = actividades.filter((a) => a.tipo === tipoMinuscula);
+
+  res.json(filtradas);
 });
+app.get('/', (req, res) => {
+res.send('API Aventuras San Gil funcionando');
+ });
+
