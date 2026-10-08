@@ -17,5 +17,8 @@
   },
   "homepage": "https://github.com/hernandezDana-29/Primer#readme",
   "description": "",
-  "type": "commonjs"
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
