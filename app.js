@@ -54,6 +54,7 @@ app.get('/actividades', (req, res) => {
 
   res.json(filtradas);
 });
+
 app.get('/', (req, res) => {
   res.send('API Aventuras San Gil funcionando');
 });
@@ -72,6 +73,11 @@ app.get('/estado', (req, res) => {
         hora: new Date().toLocaleString(), 
         totalActividades: actividades.length
     });
+});
+
+app.get('/actividades/gratis', (req, res) => {
+const actividadesGratis = actividades.filter(actividad => actividad.precio === 0);
+  res.json(actividadesGratis);
 });
 
 app.use((req, res) => {
