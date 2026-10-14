@@ -43,7 +43,12 @@ const actividades = [
 
 ];
 
-app.get('/actividades/:id(\\d+)', (req, res) => {
+app.get('/actividades/gratis', (req, res) => {
+const actividadesGratis = actividades.filter(actividad => actividad.precio === 0);
+  res.json(actividadesGratis);
+});
+
+app.get('/actividades/:id', (req, res) => {
 const id = Number(req.params.id);
 const actividad = actividades.find((a) => a.id === id);
 if (!actividad) {
@@ -51,11 +56,6 @@ return res.status(404).json({ mensaje: `No existe la actividad con id ${req.para
 });
 }
 res.json(actividad);
-});
-
-app.get('/actividades/gratis', (req, res) => {
-const actividadesGratis = actividades.filter(actividad => actividad.precio === 0);
-  res.json(actividadesGratis);
 });
 
 app.get('/actividades', (req, res) => {
@@ -76,9 +76,30 @@ app.get('/', (req, res) => {
 
 app.post('/actividades', (req, res) => {
   console.log('Body recibido:', req.body);
-  const nueva = { id: actividades.length + 1, ...req.body };
+
+ 
+  const { tipo, nombre, precio } = req.body;
+
+
+  if (!tipo) {
+    return res.status(400).json({ mensaje: 'Falta tipo' });
+  } 
+  
+  if (!nombre) {
+    return res.status(400).json({ mensaje: 'Falta nombre' });
+  }
+
+
+  const nueva = {
+    id: actividades.length + 1,
+    nombre: nombre,
+    tipo: tipo,
+    precio: precio !== undefined ? precio : null 
+  };
+
   actividades.push(nueva);
-  res.status(202).json(nueva);
+
+  return res.status(201).json(nueva);
 });
 
 
