@@ -91,16 +91,21 @@ app.post('/actividades', (req, res) => {
     return res.status(400).json({ mensaje: 'Falta nombre' });
   }
 
+  if (typeof precio !== 'number' || isNaN(precio) || precio < 0) {
+    return res.status(400).json({ mensaje: 'El precio debe ser un número y no negativo' });
+  }
 
-  const nueva = {
+ const nueva = {
     id: actividades.length + 1,
     nombre: nombre,
     tipo: tipo,
-    precio: precio !== undefined ? precio : null 
+    precio: precio
   };
 
+ 
   actividades.push(nueva);
 
+ 
   return res.status(201).json(nueva);
 });
 
