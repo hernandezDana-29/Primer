@@ -24,9 +24,6 @@ app.get('/hola', (req, res) => {
 
 });
 
-app.use((req, res) => {
-res.status(404).json({ mensaje: `No existe la ruta ${req.method} ${req.url}` });
-});
 
 
 app.listen(PORT, () => {
@@ -75,4 +72,8 @@ app.get('/estado', (req, res) => {
         hora: new Date().toLocaleString(), 
         totalActividades: actividades.length
     });
+});
+
+app.use((req, res) => {
+res.status(404).json({ mensaje: `No existe la ruta ${req.method} ${req.url}` });
 });
