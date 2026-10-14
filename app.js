@@ -43,6 +43,21 @@ const actividades = [
 
 ];
 
+app.get('/actividades/:id', (req, res) => {
+const id = Number(req.params.id);
+const actividad = actividades.find((a) => a.id === id);
+if (!actividad) {
+return res.status(404).json({ mensaje: `No existe la actividad con id ${req.params.id}`
+});
+}
+res.json(actividad);
+});
+
+app.get('/actividades/gratis', (req, res) => {
+const actividadesGratis = actividades.filter(actividad => actividad.precio === 0);
+  res.json(actividadesGratis);
+});
+
 app.get('/actividades', (req, res) => {
   console.log('query:', req.query);
   const { tipo } = req.query;
@@ -73,11 +88,6 @@ app.get('/estado', (req, res) => {
         hora: new Date().toLocaleString(), 
         totalActividades: actividades.length
     });
-});
-
-app.get('/actividades/gratis', (req, res) => {
-const actividadesGratis = actividades.filter(actividad => actividad.precio === 0);
-  res.json(actividadesGratis);
 });
 
 app.use((req, res) => {
