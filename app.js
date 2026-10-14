@@ -51,3 +51,11 @@ app.get('/', (req, res) => {
 res.send('API Aventuras San Gil funcionando');
  });
 
+app.post('/actividades', (req, res) => {
+console.log('Body recibido:', req.body);
+const nueva = { id: actividades.length + 1, ...req.body };
+actividades.push(nueva);
+res.status(201).json(nueva);
+});
+
+
