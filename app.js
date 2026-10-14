@@ -43,7 +43,7 @@ const actividades = [
 
 ];
 
-app.get('/actividades/:id', (req, res) => {
+app.get('/actividades/:id(\\d+)', (req, res) => {
 const id = Number(req.params.id);
 const actividad = actividades.find((a) => a.id === id);
 if (!actividad) {
