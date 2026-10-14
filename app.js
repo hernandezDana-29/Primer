@@ -69,3 +69,10 @@ app.post('/actividades', (req, res) => {
 });
 
 
+app.get('/estado', (req, res) => {
+    res.json({
+        servidor: "ok",
+        hora: new Date().toLocaleString(), 
+        totalActividades: actividades.length
+    });
+});
