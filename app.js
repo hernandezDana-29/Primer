@@ -20,6 +20,11 @@ app.get('/', (req, res) => {
 app.get('/hola', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify([{ Mensaje: 'Encontrado' }]));
+
+});
+
+app.use((req, res) => {
+res.status(404).json({ mensaje: `No existe la ruta ${req.method} ${req.url}` });
 });
 
 app.listen(PORT, () => {
