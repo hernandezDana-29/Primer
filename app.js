@@ -5,6 +5,7 @@ import express from 'express';
 const app = express();
 app.use(express.json())
 
+
 app.use((req, res, next) => {
   console.log(`${new Date().toLocaleTimeString()} ${req.method} ${req.url}`);
   next();
@@ -26,6 +27,7 @@ app.get('/hola', (req, res) => {
 app.use((req, res) => {
 res.status(404).json({ mensaje: `No existe la ruta ${req.method} ${req.url}` });
 });
+
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
