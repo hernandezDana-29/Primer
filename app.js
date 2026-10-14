@@ -43,6 +43,7 @@ const actividades = [
 
 ];
 
+//R2
 app.get('/actividades/gratis', (req, res) => {
 const actividadesGratis = actividades.filter(actividad => actividad.precio === 0);
   res.json(actividadesGratis);
@@ -74,6 +75,7 @@ app.get('/', (req, res) => {
   res.send('API Aventuras San Gil funcionando');
 });
 
+//R3
 app.post('/actividades', (req, res) => {
   console.log('Body recibido:', req.body);
 
@@ -102,7 +104,7 @@ app.post('/actividades', (req, res) => {
   return res.status(201).json(nueva);
 });
 
-
+//R1
 app.get('/estado', (req, res) => {
     res.json({
         servidor: "ok",
