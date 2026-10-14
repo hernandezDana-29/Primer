@@ -1,61 +1,64 @@
 //app.js
 import express from 'express';
 
+
 const app = express();
+app.use(express.json())
+
 app.use((req, res, next) => {
-console.log(`${new Date().toLocaleTimeString()} ${req.method} ${req.url}`);
-next();
+  console.log(`${new Date().toLocaleTimeString()} ${req.method} ${req.url}`);
+  next();
 });
 
 const PORT = process.env.PORT || 3000;
 
 
 app.get('/', (req, res) => {
-res.send('API Aventuras San Gil funcionando');
+  res.send('API Aventuras San Gil funcionando');
 });
 
 app.get('/hola', (req, res) => {
-res.setHeader('Content-Type', 'application/json');
-res.send(JSON.stringify([{ Mensaje:'Encontrado' }]));
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify([{ Mensaje: 'Encontrado' }]));
 });
 
 app.listen(PORT, () => {
-console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 
 app.get('/no-existe', (req, res) => {
-res.statusCode = 404;
-res.end('Ruta no encontrada');
+  res.statusCode = 404;
+  res.end('Ruta no encontrada');
 });
 
 const actividades = [
-{ id: 1, nombre: 'Rafting en el río Fonce', tipo: 'agua', precio: 60000 },
-{ id: 2, nombre: 'Parapente en el cañón', tipo: 'aire', precio: 180000 },
-{ id: 3, nombre: 'Caminata Camino Real a Barichara', tipo: 'tierra', precio: 0 },
-{ id: 4, nombre: 'Torrentismo en cascada', tipo: 'agua', precio: 70000 },
+  { id: 1, nombre: 'Rafting en el río Fonce', tipo: 'agua', precio: 60000 },
+  { id: 2, nombre: 'Parapente en el cañón', tipo: 'aire', precio: 180000 },
+  { id: 3, nombre: 'Caminata Camino Real a Barichara', tipo: 'tierra', precio: 0 },
+  { id: 4, nombre: 'Torrentismo en cascada', tipo: 'agua', precio: 70000 },
 
 ];
 
 app.get('/actividades', (req, res) => {
-console.log('query:', req.query);
-const { tipo } = req.query;
-if (!tipo) {
-return res.json(actividades);
-}
-const tipoMinuscula = tipo.toLowerCase();
+  console.log('query:', req.query);
+  const { tipo } = req.query;
+  if (!tipo) {
+    return res.json(actividades);
+  }
+  const tipoMinuscula = tipo.toLowerCase();
   const filtradas = actividades.filter((a) => a.tipo === tipoMinuscula);
 
   res.json(filtradas);
 });
 app.get('/', (req, res) => {
-res.send('API Aventuras San Gil funcionando');
- });
+  res.send('API Aventuras San Gil funcionando');
+});
 
 app.post('/actividades', (req, res) => {
-console.log('Body recibido:', req.body);
-const nueva = { id: actividades.length + 1, ...req.body };
-actividades.push(nueva);
-res.status(201).json(nueva);
+  console.log('Body recibido:', req.body);
+  const nueva = { id: actividades.length + 1, ...req.body };
+  actividades.push(nueva);
+  res.status(202).json(nueva);
 });
 
 
